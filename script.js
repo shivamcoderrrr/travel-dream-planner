@@ -23,7 +23,7 @@ const DOM = {
     mapPinCount: document.getElementById('mapPinCount'),
     
     // Tools
-    darkModeToggle: document.getElementById('darkModeToggle'),
+    darkModeToggles: document.querySelectorAll('.dark-mode-toggle'),
     exportBtn: document.getElementById('exportJson'),
     importInput: document.getElementById('importJson'),
     
@@ -72,7 +72,8 @@ function initDarkMode() {
     }
 }
 
-function toggleDarkMode() {
+function toggleDarkMode(e) {
+    if (e) e.preventDefault();
     document.documentElement.classList.toggle('dark');
     localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 }
@@ -221,7 +222,7 @@ function addMarkerToMap(dest) {
 // ----------------------------------------
 function setupEventListeners() {
     // Header Tools
-    DOM.darkModeToggle.addEventListener('click', toggleDarkMode);
+    DOM.darkModeToggles.forEach(btn => btn.addEventListener('click', toggleDarkMode));
     DOM.exportBtn.addEventListener('click', exportData);
     DOM.importInput.addEventListener('change', importData);
 
